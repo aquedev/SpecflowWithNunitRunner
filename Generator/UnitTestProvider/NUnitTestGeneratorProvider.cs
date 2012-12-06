@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using TechTalk.SpecFlow.BindingSkeletons;
+using TechTalk.SpecFlow.Parser.SyntaxElements;
 using TechTalk.SpecFlow.Utils;
 
 namespace TechTalk.SpecFlow.Generator.UnitTestProvider
@@ -44,7 +45,7 @@ namespace TechTalk.SpecFlow.Generator.UnitTestProvider
         {
             CodeDomHelper.AddAttribute(generationContext.TestClass, TESTFIXTURE_ATTR);
             CodeDomHelper.AddAttribute(generationContext.TestClass, DESCRIPTION_ATTR, featureTitle);
-          
+
         }
 
         public void SetTestClassCategories(TestClassGenerationContext generationContext, IEnumerable<string> featureCategories)
@@ -84,20 +85,24 @@ namespace TechTalk.SpecFlow.Generator.UnitTestProvider
             CodeDomHelper.AddAttribute(generationContext.TestCleanupMethod, TESTTEARDOWN_ATTR);
         }
 
+        private List<string> m_parametersDeclaredInMethod = new List<string>();
 
         public void SetTestMethod(TestClassGenerationContext generationContext, CodeMemberMethod testMethod, string scenarioTitle)
         {
+            m_parametersDeclaredInMethod = new List<string>(); //reset it
+
             CodeDomHelper.AddAttribute(testMethod, TEST_ATTR);
             CodeDomHelper.AddAttribute(testMethod, DESCRIPTION_ATTR, scenarioTitle);
 
             var classesDeclared = new List<string>();
-            
-            foreach (var scenario in generationContext.Feature.Scenarios.Where(x =>x.Title == scenarioTitle))
+            var paramaeters = new List<KeyValuePair<string, System.Type>>();
+
+            foreach (var scenario in generationContext.Feature.Scenarios.Where(x => x.Title == scenarioTitle))
             {
-                
-                foreach (var scenarioStep in scenario.Steps)
+
+                foreach (ScenarioStep scenarioStep in scenario.Steps)
                 {
-                    
+
                     var specsFolder = Directory.GetParent(generationContext.Feature.SourceFile);
                     var result = m_stepTextAnalyzer.Analyze(scenarioStep.Text, new CultureInfo("en-GB"));
 
@@ -107,6 +112,8 @@ namespace TechTalk.SpecFlow.Generator.UnitTestProvider
                     if (scenarioStep.TableArg != null)
                         result.Parameters.Add(new AnalyzedStepParameter("Table", "table"));
                     var regex = GetSimpleRegex(result);
+
+
 
                     try
                     {
@@ -121,33 +128,57 @@ namespace TechTalk.SpecFlow.Generator.UnitTestProvider
                         foreach (string file in files)
                         {
                             string otherFile = Path.Combine(newFolderPath, Path.GetFileName(file));
-                            File.Copy(file, otherFile,true);
+                            File.Copy(file, otherFile, true);
                         }
 
                         var dllname = new FileInfo(generationContext.Feature.SourceFile).Directory.Parent.Name + ".dll";
 
                         var assembly = Assembly.LoadFrom(String.Concat(newFolderPath, @"\", dllname));
 
-                            var methods = assembly.GetTypes()
-                                .SelectMany(t => t.GetMethods())
-                                .Where(m => HasSpecflowAttribute(m.GetCustomAttributesData(), regex))
-                                .ToArray();
-                        
+                        var methods = assembly.GetTypes()
+                            .SelectMany(t => t.GetMethods())
+                            .Where(m => HasSpecflowAttribute(m.GetCustomAttributesData(), regex))
+                            .ToArray();
 
-                            foreach (var methodInfo in methods)
-                            {
-                                classesDeclared = AddStatements(testMethod, methodInfo, classesDeclared);
-                                
-                            }
-                        
-                        
 
-                    } catch(Exception exception)
+                        foreach (var methodInfo in methods)
+                        {
+                            //foreach (var param in methodInfo.GetParameters())
+                            //{
+                            //    paramaeters.Add(new KeyValuePair<string, Type>(param.Name, param.ParameterType));
+                            //}
+                            classesDeclared = AddStatements(testMethod, methodInfo, classesDeclared, scenarioStep, result,regex);
+
+                        }
+
+                    }
+                    catch (Exception exception)
                     {
                         throw new Exception("oops", exception);
                     }
                 }
             }
+
+            /*  This is to add missing parameters to the method */
+
+            //foreach (var keyValuePair in paramaeters)
+            //{
+            //    bool alreadyHasParameter = false;
+
+            //    foreach (var parameter in testMethod.Parameters)
+            //    {
+            //        if ((string) parameter == keyValuePair.Key)
+            //        {
+            //            alreadyHasParameter = true;
+            //        }
+            //    }
+
+            //    if (!alreadyHasParameter)
+            //    {
+            //        testMethod.Parameters.Add(new CodeParameterDeclarationExpression(keyValuePair.Value,keyValuePair.Key));
+            //    }
+
+            //}
         }
 
         private bool HasSpecflowAttribute(IList<CustomAttributeData> getCustomAttributesData, string regex)
@@ -172,7 +203,7 @@ namespace TechTalk.SpecFlow.Generator.UnitTestProvider
             return false;
         }
 
-        private static List<string> AddStatements(CodeMemberMethod testMethod, MethodInfo methodInfo, List<string> classesDeclared)
+        private List<string> AddStatements(CodeMemberMethod testMethod, MethodInfo methodInfo, List<string> classesDeclared, ScenarioStep step, AnalyzedStepText stepText, string regex)
         {
             if (!HasClassBeenDeclared(classesDeclared, methodInfo.DeclaringType.ToString()))
             {
@@ -187,13 +218,56 @@ namespace TechTalk.SpecFlow.Generator.UnitTestProvider
 
             if (parameters.Count() >= 1)
             {
+                //declare any variables needed here
+                //string value = step.Text
+                int i = 0;
+                foreach (ParameterInfo parameterInfo in parameters) //these are the parameters needed
+                {
+                    string parameterValue = stepText.TextParts[i];
 
 
-                    testMethod.Statements.Add(new CodeMethodInvokeExpression(
-                                            new CodeTypeReferenceExpression(
-                                                methodInfo.DeclaringType.Name.ToLower()),
-                                            methodInfo.Name,
-                                            GetParameters(testMethod, methodInfo)));
+                    Match match = Regex.Match(step.Text,regex);
+                    if (match.Success)
+                    {
+                         parameterValue = match.Groups[1].Value;
+                    }
+
+                    bool paramAlreadyDeclared = false;
+
+                    //check not in test case
+                    foreach (CodeParameterDeclarationExpression parameter in testMethod.Parameters) //these are the ones specified by the test case attributes
+                    {
+                        if (parameterInfo.Name == parameter.Name)
+                        {
+                            paramAlreadyDeclared = true;
+                        }
+                    }
+
+                    //check not already declared in body of method
+                    foreach (var preDecalredParam in m_parametersDeclaredInMethod)
+                    {
+                        if (preDecalredParam == parameterInfo.Name)
+                        {
+                            paramAlreadyDeclared = true;
+                        }
+                    }
+
+                    if (!paramAlreadyDeclared)
+                    {
+                        m_parametersDeclaredInMethod.Add(parameterInfo.Name);//record that param declared
+                        CodeVariableDeclarationStatement variable = new CodeVariableDeclarationStatement(typeof(string), parameterInfo.Name, new CodePrimitiveExpression(parameterValue));
+                        testMethod.Statements.Add(variable);
+                    }
+
+                }
+
+
+
+                testMethod.Statements.Add(new CodeMethodInvokeExpression(
+                                        new CodeTypeReferenceExpression(
+                                            methodInfo.DeclaringType.Name.ToLower()),
+                                        methodInfo.Name,
+                                        GetParameters(testMethod, methodInfo)));
             }
             else
             {
@@ -224,13 +298,13 @@ namespace TechTalk.SpecFlow.Generator.UnitTestProvider
             int i = 0;
             foreach (var parameter in methodInfo.GetParameters())
             {
-                if(parameter.ParameterType == typeof(Int32))
+                if (parameter.ParameterType == typeof(Int32))
                 {
                     list[i] = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression(
                             "System.Convert"),
                         "ToInt32", new CodeVariableReferenceExpression(parameter.Name));
                 }
-                else if (parameter.ParameterType == typeof (DateTime))
+                else if (parameter.ParameterType == typeof(DateTime))
                 {
                     list[i] = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression(
                                                                  "System.DateTime"),
