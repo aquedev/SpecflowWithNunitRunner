@@ -2,6 +2,7 @@ using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using TechTalk.SpecFlow.Parser.SyntaxElements;
 using TechTalk.SpecFlow.Utils;
 
 namespace TechTalk.SpecFlow.Generator.UnitTestProvider
@@ -209,6 +210,11 @@ namespace TechTalk.SpecFlow.Generator.UnitTestProvider
         public void SetTestMethodAsRow(TestClassGenerationContext generationContext, CodeMemberMethod testMethod, string scenarioTitle, string exampleSetName, string variantName, IEnumerable<KeyValuePair<string, string>> arguments)
         {
             // doing nothing since we support RowTest
+        }
+
+        public void SetTestBackgroundMethod(TestClassGenerationContext generationContext, CodeMemberMethod backgroundMethod, ScenarioSteps steps)
+        {
+            throw new NotImplementedException();
         }
     }
 }

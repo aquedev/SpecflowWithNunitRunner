@@ -2,6 +2,7 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using TechTalk.SpecFlow.Parser.SyntaxElements;
 using TechTalk.SpecFlow.Utils;
 
 namespace TechTalk.SpecFlow.Generator.UnitTestProvider
@@ -172,6 +173,11 @@ namespace TechTalk.SpecFlow.Generator.UnitTestProvider
             {
                 SetProperty(testMethod, "Parameter:" + pair.Key, pair.Value);
             }
+        }
+
+        public void SetTestBackgroundMethod(TestClassGenerationContext generationContext, CodeMemberMethod backgroundMethod, ScenarioSteps steps)
+        {
+            throw new NotImplementedException();
         }
     }
 }

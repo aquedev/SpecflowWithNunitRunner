@@ -1,4 +1,6 @@
-﻿namespace TechTalk.SpecFlow
+﻿using TechTalk.SpecFlow.Infrastructure;
+
+namespace TechTalk.SpecFlow
 {
     public abstract class Steps
     {
@@ -6,12 +8,12 @@
 
         protected Steps(ITestRunner testRunner)
         {
-            this.testRunner = testRunner;
+           // this.testRunner = testRunner;
         }
 
-        protected Steps() : this(ScenarioContext.Current.TestRunner)  // This will be AsyncTestRunner for asynchronous tests
+        protected Steps()// : this(ScenarioContext.Current.TestRunner)  // This will be AsyncTestRunner for asynchronous tests
         {
-            testRunner = ScenarioContext.Current.TestRunner;
+           // testRunner = TestRunnerManager.GetTestRunner();
         }
 
         #region Given

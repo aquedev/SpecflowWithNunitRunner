@@ -112,7 +112,7 @@ namespace TechTalk.SpecFlow.Infrastructure
             featureContext.Cleanup();
         }
 
-        public void InitializeScenarioContext(ScenarioInfo scenarioInfo)
+        public void InitializeScenarioContext(ScenarioInfo scenarioInfo) //LEE
         {
             var testRunner = parentContainer.Resolve<ITestRunner>(); // we need to delay-resolve the test runner to avoid circular dependencies
             var newContext = new ScenarioContext(scenarioInfo, testRunner, parentContainer);
