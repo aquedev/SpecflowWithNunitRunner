@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{DCE0C3C4-5BC6-4A30-86BE-3FEFF4677A01}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A10B5CD6-38EC-4D7E-9D1C-2EBA8017E437}"
@@ -18,6 +18,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 		Installer\Resources\header.bmp = Installer\Resources\header.bmp
 		Installer\Resources\logo.png = Installer\Resources\logo.png
 		Installer\Resources\welcome_dialog.bmp = Installer\Resources\welcome_dialog.bmp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdeIntegration", "IdeIntegration", "{55E45533-9AAA-41AB-B44F-7530799C9337}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AlternativeRuntimes", "AlternativeRuntimes", "{01A98306-2E7F-42E5-A180-C31C4DC82C57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{0359B7D7-7E29-48E9-8DF9-7D1FACFA5CFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8C4BDE8C-3363-4575-AAA4-E6D7AAA51C5B}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\nuget.exe = .nuget\nuget.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalk.SpecFlow.Reporting", "Reporting\TechTalk.SpecFlow.Reporting.csproj", "{FC43509F-E7D3-40C4-B4C3-1E6C9D5530A4}"
@@ -41,11 +55,7 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SpecFlowInstaller", "Instal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalk.SpecFlow.Silverlight3", "AlternativeRuntimes\Runtime.Silverlight3\TechTalk.SpecFlow.Silverlight3.csproj", "{B93F95CF-BF89-4D92-BB0F-86885B9B6DCE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdeIntegration", "IdeIntegration", "{55E45533-9AAA-41AB-B44F-7530799C9337}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDevelop.TechTalk.SpecFlow", "IdeIntegration\MonoDevelopIntegration\MonoDevelop.TechTalk.SpecFlow.csproj", "{199D2315-F5BD-463C-B16A-BE31A845792B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalk.SpecFlow.Vs2010Integration", "IdeIntegration\Vs2010Integration\TechTalk.SpecFlow.Vs2010Integration.csproj", "{96294E6F-8875-4D12-8577-4EC83E60BD6C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalk.SpecFlow.Utils", "Utils\TechTalk.SpecFlow.Utils.csproj", "{C0AF4A43-0C3B-47C7-86DE-79FB632B1453}"
 EndProject
@@ -53,7 +63,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowBinPackage", "Insta
 	ProjectSection(ProjectDependencies) = postProject
 		{199D2315-F5BD-463C-B16A-BE31A845792B} = {199D2315-F5BD-463C-B16A-BE31A845792B}
 		{C0AF4A43-0C3B-47C7-86DE-79FB632B1453} = {C0AF4A43-0C3B-47C7-86DE-79FB632B1453}
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C} = {96294E6F-8875-4D12-8577-4EC83E60BD6C}
 		{FC43509F-E7D3-40C4-B4C3-1E6C9D5530A4} = {FC43509F-E7D3-40C4-B4C3-1E6C9D5530A4}
 		{B93F95CF-BF89-4D92-BB0F-86885B9B6DCE} = {B93F95CF-BF89-4D92-BB0F-86885B9B6DCE}
 		{7CCEF6D6-FC17-422E-9BED-EDD752B6496F} = {7CCEF6D6-FC17-422E-9BED-EDD752B6496F}
@@ -63,8 +72,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilsTests", "Tests\UtilsTests\UtilsTests.csproj", "{AAB77D7A-20E0-4FA6-B139-BBCBB5215B80}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalk.SpecFlow.WindowsPhone7", "AlternativeRuntimes\Runtime.WindowsPhone7\TechTalk.SpecFlow.WindowsPhone7.csproj", "{E00271E7-F422-42B9-89D0-E29C96C90CE2}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AlternativeRuntimes", "AlternativeRuntimes", "{01A98306-2E7F-42E5-A180-C31C4DC82C57}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalk.SpecFlow.IdeIntegration", "IdeIntegration\IdeIntegration\TechTalk.SpecFlow.IdeIntegration.csproj", "{44D52C1B-0ABC-44B6-8EB8-0F754E264226}"
 EndProject
@@ -79,29 +86,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetPackages", "Installer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalk.SpecFlow.SharpDevelop4Integration", "IdeIntegration\SharpDevelop4Integration\TechTalk.SpecFlow.SharpDevelop4Integration.csproj", "{C091E608-2A76-40B2-9548-AB5A2A77BD78}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{0359B7D7-7E29-48E9-8DF9-7D1FACFA5CFA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalk.SpecFlow.Specs", "Tests\TechTalk.SpecFlow.Specs\TechTalk.SpecFlow.Specs.csproj", "{ADED3F39-1742-42E2-A55A-3043AC84BDAD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalk.SpecFlow.IntegrationTests", "Tests\TechTalk.SpecFlow.IntegrationTests\TechTalk.SpecFlow.IntegrationTests.csproj", "{33B3107E-666D-4C31-96C0-745697E51973}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalk.SpecFlow.Specs.Silverlight4", "Tests\TechTalk.SpecFlow.Specs.Silverlight4\TechTalk.SpecFlow.Specs.Silverlight4.csproj", "{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{27B6695E-7049-4C1B-8820-812722128D9E} = {27B6695E-7049-4C1B-8820-812722128D9E}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalk.SpecFlow.Specs.Silverlight4.Web", "Tests\TechTalk.SpecFlow.Specs.Silverlight4.Web\TechTalk.SpecFlow.Specs.Silverlight4.Web.csproj", "{11197943-7A9A-4D93-A5F1-2344E0F993DB}"
-	ProjectSection(ProjectDependencies) = postProject
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7} = {ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8C4BDE8C-3363-4575-AAA4-E6D7AAA51C5B}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\nuget.exe = .nuget\nuget.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -229,18 +218,6 @@ Global
 		{199D2315-F5BD-463C-B16A-BE31A845792B}.VS2010IntegrationTest|Any CPU.ActiveCfg = Debug|Any CPU
 		{199D2315-F5BD-463C-B16A-BE31A845792B}.VS2010IntegrationTest|Any CPU.Build.0 = Debug|Any CPU
 		{199D2315-F5BD-463C-B16A-BE31A845792B}.VS2010IntegrationTest|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C}.VS2010IntegrationTest|Any CPU.ActiveCfg = VS2010IntegrationTest|Any CPU
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C}.VS2010IntegrationTest|Any CPU.Build.0 = VS2010IntegrationTest|Any CPU
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C}.VS2010IntegrationTest|Mixed Platforms.ActiveCfg = VS2010IntegrationTest|Any CPU
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C}.VS2010IntegrationTest|Mixed Platforms.Build.0 = VS2010IntegrationTest|Any CPU
 		{C0AF4A43-0C3B-47C7-86DE-79FB632B1453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C0AF4A43-0C3B-47C7-86DE-79FB632B1453}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0AF4A43-0C3B-47C7-86DE-79FB632B1453}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -369,18 +346,6 @@ Global
 		{33B3107E-666D-4C31-96C0-745697E51973}.VS2010IntegrationTest|Any CPU.Build.0 = Debug|Any CPU
 		{33B3107E-666D-4C31-96C0-745697E51973}.VS2010IntegrationTest|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{33B3107E-666D-4C31-96C0-745697E51973}.VS2010IntegrationTest|Mixed Platforms.Build.0 = Release|Any CPU
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}.VS2010IntegrationTest|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}.VS2010IntegrationTest|Any CPU.Build.0 = Debug|Any CPU
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}.VS2010IntegrationTest|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7}.VS2010IntegrationTest|Mixed Platforms.Build.0 = Release|Any CPU
 		{11197943-7A9A-4D93-A5F1-2344E0F993DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11197943-7A9A-4D93-A5F1-2344E0F993DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11197943-7A9A-4D93-A5F1-2344E0F993DB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -406,17 +371,15 @@ Global
 		{0359B7D7-7E29-48E9-8DF9-7D1FACFA5CFA} = {A10B5CD6-38EC-4D7E-9D1C-2EBA8017E437}
 		{ADED3F39-1742-42E2-A55A-3043AC84BDAD} = {A10B5CD6-38EC-4D7E-9D1C-2EBA8017E437}
 		{33B3107E-666D-4C31-96C0-745697E51973} = {A10B5CD6-38EC-4D7E-9D1C-2EBA8017E437}
-		{ED351C5B-57FF-48C1-A7CB-D59C8B4469D7} = {A10B5CD6-38EC-4D7E-9D1C-2EBA8017E437}
 		{11197943-7A9A-4D93-A5F1-2344E0F993DB} = {A10B5CD6-38EC-4D7E-9D1C-2EBA8017E437}
+		{199D2315-F5BD-463C-B16A-BE31A845792B} = {55E45533-9AAA-41AB-B44F-7530799C9337}
+		{44D52C1B-0ABC-44B6-8EB8-0F754E264226} = {55E45533-9AAA-41AB-B44F-7530799C9337}
+		{C091E608-2A76-40B2-9548-AB5A2A77BD78} = {55E45533-9AAA-41AB-B44F-7530799C9337}
+		{B93F95CF-BF89-4D92-BB0F-86885B9B6DCE} = {01A98306-2E7F-42E5-A180-C31C4DC82C57}
+		{E00271E7-F422-42B9-89D0-E29C96C90CE2} = {01A98306-2E7F-42E5-A180-C31C4DC82C57}
+		{F8FACCF0-5497-4C6B-861F-78D72FD9561B} = {0359B7D7-7E29-48E9-8DF9-7D1FACFA5CFA}
 		{AAB77D7A-20E0-4FA6-B139-BBCBB5215B80} = {0359B7D7-7E29-48E9-8DF9-7D1FACFA5CFA}
 		{69505BAC-12B9-4443-BB3B-A94E51EA5922} = {0359B7D7-7E29-48E9-8DF9-7D1FACFA5CFA}
 		{97C30FCC-3093-4430-93DC-D671C656C404} = {0359B7D7-7E29-48E9-8DF9-7D1FACFA5CFA}
-		{F8FACCF0-5497-4C6B-861F-78D72FD9561B} = {0359B7D7-7E29-48E9-8DF9-7D1FACFA5CFA}
-		{E00271E7-F422-42B9-89D0-E29C96C90CE2} = {01A98306-2E7F-42E5-A180-C31C4DC82C57}
-		{B93F95CF-BF89-4D92-BB0F-86885B9B6DCE} = {01A98306-2E7F-42E5-A180-C31C4DC82C57}
-		{199D2315-F5BD-463C-B16A-BE31A845792B} = {55E45533-9AAA-41AB-B44F-7530799C9337}
-		{96294E6F-8875-4D12-8577-4EC83E60BD6C} = {55E45533-9AAA-41AB-B44F-7530799C9337}
-		{44D52C1B-0ABC-44B6-8EB8-0F754E264226} = {55E45533-9AAA-41AB-B44F-7530799C9337}
-		{C091E608-2A76-40B2-9548-AB5A2A77BD78} = {55E45533-9AAA-41AB-B44F-7530799C9337}
 	EndGlobalSection
 EndGlobal

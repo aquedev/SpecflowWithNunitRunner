@@ -89,14 +89,14 @@ namespace TechTalk.SpecFlow.Infrastructure
             Match match = null;
             if (useRegexMatching && stepDefinitionBinding.Regex != null && !(match = stepDefinitionBinding.Regex.Match(stepInstance.Text)).Success)
             {
-                throw new Exception(String.Format("Error 1: Keyword:  {0} Step Def type {1} TEXT: {2}", stepInstance.Keyword, stepInstance.StepDefinitionType, stepInstance.Text));
+               // throw new Exception(String.Format("Error 1: Keyword:  {0} Step Def type {1} TEXT: {2}", stepInstance.Keyword, stepInstance.StepDefinitionType, stepInstance.Text));
                 return BindingMatch.NonMatching;
             }
 
             int scopeMatches = 0;
             if (useScopeMatching && stepDefinitionBinding.IsScoped && stepInstance.StepContext != null && !stepDefinitionBinding.BindingScope.Match(stepInstance.StepContext, out scopeMatches))
             {
-                throw new Exception(String.Format("Error 2: Keyword:  {0} Step Def type {1} TEXT: {2}", stepInstance.Keyword, stepInstance.StepDefinitionType, stepInstance.Text));
+                //throw new Exception(String.Format("Error 2: Keyword:  {0} Step Def type {1} TEXT: {2}", stepInstance.Keyword, stepInstance.StepDefinitionType, stepInstance.Text));
                 return BindingMatch.NonMatching;
               
             }
@@ -117,7 +117,6 @@ namespace TechTalk.SpecFlow.Infrastructure
                 if (arguments.Where((arg, argIndex) => !CanConvertArg(arg, bindingParameters[argIndex].Type, bindingCulture)).Any())
                 {
                     throw new Exception(String.Format("Error 3: Keyword:  {0} Step Def type {1} TEXT: {2}", stepInstance.Keyword, stepInstance.StepDefinitionType, stepInstance.Text));
-                    return BindingMatch.NonMatching;
                 }
             }
 

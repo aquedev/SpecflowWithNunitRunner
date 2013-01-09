@@ -192,14 +192,10 @@ namespace TechTalk.SpecFlow.GeneratorTests.Aqueduct
                     if (File.Exists(strTempAssmbPath))
                     {
                         var temp = domain.Load(AssemblyName.GetAssemblyName(strTempAssmbPath).Name);
-                    } else
-                    {
-                        int iii = 0;
                     }
-                    
                 } catch(Exception)
                 {
-                    int i = 0;
+                   
                 }
             }
 
